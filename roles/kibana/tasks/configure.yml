@@ -1,0 +1,15 @@
+---
+- name: create folder for Kibana
+  # become: true
+  file:
+    state: directory
+    path: "/etc/kibana/"
+    mode: 0755
+
+- name: Configure Kibana
+  # become: true
+  template:
+    src: kibana.yml.j2
+    mode: 0644
+    dest: /etc/kibana/kibana.yml
+  # notify: restart kibana

@@ -1,0 +1,20 @@
+pipeline{
+    agent any
+    stages{
+        stage('Git checkout'){
+            steps{
+                git 'https://github.com/HimuraKrd/devops-netology-elk.git'
+            }
+        }
+        stage('install requirements for elastic'){
+            steps{
+                sh 'pip3 install -r roles/elastic/test-requirements.txt'
+            }
+        }
+        stage('run molecule test for the elastic role'){
+            steps{
+                sh 'cd roles/elastic/ && molecule test'
+            }
+        }
+    }
+}
